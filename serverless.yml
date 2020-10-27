@@ -1,0 +1,96 @@
+service: serverless-template
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: ${opt:region, 'eu-west-1'}
+  stage: ${opt:stage, 'dev'}
+
+  logRetentionInDays: ${self:custom.settings.logging.retention}
+
+  deploymentBucket:
+    name: serverless-deployments.${opt:environment}.mkb-brandstof.nl
+
+  environment:
+    ENVIRONMENT: ${opt:environment}
+    LOG_LEVEL: ${self:custom.settings.logging.level}
+    SSM_PARAM_PATH: "/${self:service}/"
+    STAGE: ${self:provider.stage}
+
+# you can add statements that apply to all Lambda functions here to the Lambda function's IAM Role here
+#  iamRoleStatements:
+#    - Effect: "Allow"
+#      Action: "s3:ListBucket"
+#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
+#    - Effect: "Allow"
+#      Action: "s3:PutObject"
+#      Resource:
+#        Fn::Join:
+#          - ""
+#          - - "arn:aws:s3:::"
+#            - "Ref" : "ServerlessDeploymentBucket"
+#            - "/*"
+
+
+# you can add packaging information here
+#package:
+#  include:
+#    - include-me.js
+#    - include-me-dir/**
+#  exclude:
+#    - exclude-me.js
+#    - exclude-me-dir/**
+
+custom:
+  settings: ${file(settings/${self:provider.stage}.yml)}
+
+
+functions:
+  hello:
+    handler: src/hello.handler
+    description: "REPLACE THIS"
+    memorySize: 256 # (MB) - optional, default is 1024
+    timeout: 10 # (seconds) - optional, default is 6
+#    The following are a few example events you can configure
+#    NOTE: Please make sure to change your handler code to work with those events
+#    Check the event documentation for details:
+#     https://www.serverless.com/framework/docs/providers/aws/events/
+#    events:
+#      - http:
+#          path: users/create
+#          method: get
+#      - websocket: $connect
+#      - s3: ${env:BUCKET}
+#      - schedule: rate(10 minutes)
+#      - sns: greeter-topic
+#      - stream: arn:aws:dynamodb:region:XXXXXX:table/foo/stream/1970-01-01T00:00:00.000
+#      - cloudwatchEvent:
+#          event:
+#            source:
+#              - "aws.ec2"
+#            detail-type:
+#              - "EC2 Instance State-change Notification"
+#            detail:
+#              state:
+#                - pending
+#      - cloudwatchLog: '/aws/lambda/hello'
+#      - cognitoUserPool:
+#          pool: MyUserPool
+#          trigger: PreSignUp
+    environment:
+      SOME_VAR: "some value"
+
+
+# you can add CloudFormation resource templates here
+#resources:
+#  Resources:
+#    NewResource:
+#      Type: AWS::S3::Bucket
+#      Properties:
+#        BucketName: my-new-bucket
+#  Outputs:
+#     NewOutput:
+#       Description: "Description for the output"
+#       Value: "Some output value"

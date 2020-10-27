@@ -1,0 +1,28 @@
+{
+  "name": "serverless-template",
+  "version": "1.0.0",
+  "description": "Serverless template for AWS Node.js projects",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkb-brandstof/serverless-template.git"
+  },
+  "keywords": [
+    "serverless",
+    "template",
+    "aws",
+    "nodejs"
+  ],
+  "author": "MKB Brandstof <devops@mkb-brandstof.nl>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mkb-brandstof/serverless-template/issues"
+  },
+  "homepage": "https://github.com/mkb-brandstof/serverless-template#readme",
+  "devDependencies": {
+    "serverless": "^2.4.0"
+  }
+}
