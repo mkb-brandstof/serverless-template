@@ -16,10 +16,11 @@ provider:
   environment:
     ENVIRONMENT: ${opt:environment}
     LOG_LEVEL: ${self:custom.settings.logging.level}
-    SSM_PARAM_PATH: "/${self:service}/"
+    SSM_PARAM_PATH: /${self:service}/
     STAGE: ${self:provider.stage}
 
 # you can add statements that apply to all Lambda functions here to the Lambda function's IAM Role here
+# permissions for individual functions should be added to the iamRoleStatements property on the function itself
 #  iamRoleStatements:
 #    - Effect: "Allow"
 #      Action: "s3:ListBucket"
@@ -32,6 +33,9 @@ provider:
 #          - - "arn:aws:s3:::"
 #            - "Ref" : "ServerlessDeploymentBucket"
 #            - "/*"
+
+plugins:
+  - serverless-iam-roles-per-function
 
 
 # you can add packaging information here
@@ -50,7 +54,7 @@ custom:
 functions:
   hello:
     handler: src/hello.handler
-    description: "REPLACE THIS"
+    description: REPLACE THIS
     memorySize: 256 # (MB) - optional, default is 1024
     timeout: 10 # (seconds) - optional, default is 6
 #    The following are a few example events you can configure
@@ -80,7 +84,11 @@ functions:
 #          pool: MyUserPool
 #          trigger: PreSignUp
     environment:
-      SOME_VAR: "some value"
+      SOME_VAR: some value
+    iamRoleStatements:
+      - Effect: Allow
+        Action: s3:ListBucket
+        Resource: arn:aws:s3:::some-random-bucket.example.com
 
 
 # you can add CloudFormation resource templates here
