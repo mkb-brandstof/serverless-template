@@ -36,6 +36,7 @@ provider:
 
 plugins:
   - serverless-iam-roles-per-function
+  - serverless-webpack
 
 
 # you can add packaging information here
@@ -49,6 +50,8 @@ plugins:
 
 custom:
   settings: ${file(settings/${self:provider.stage}.yml)}
+  webpack:
+    includeModules: true
 
 
 functions:
