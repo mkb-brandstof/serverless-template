@@ -4,18 +4,14 @@
   "description": "Serverless template for AWS Node.js projects",
   "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint $(ls | grep -e \"src\\|scripts\\|tests\")"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mkb-brandstof/serverless-template.git"
   },
-  "keywords": [
-    "serverless",
-    "template",
-    "aws",
-    "nodejs"
-  ],
+  "keywords": [ "serverless", "template", "aws", "nodejs" ],
   "author": "MKB Brandstof <devops@mkb-brandstof.nl>",
   "license": "MIT",
   "bugs": {
@@ -23,6 +19,7 @@
   },
   "homepage": "https://github.com/mkb-brandstof/serverless-template#readme",
   "devDependencies": {
+    "eslint": "^7.12.1",
     "serverless": "^2.4.0",
     "serverless-copy-webpack-plugin": "^1.0.0",
     "serverless-iam-roles-per-function": "^2.0.2",

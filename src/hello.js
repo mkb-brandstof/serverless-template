@@ -1,15 +1,17 @@
 'use strict';
 
-module.exports.handler = async event => {
+module.exports.handler = event => {
+  const statusCode = 200;
+
   return {
-    statusCode: 200,
+    statusCode,
     body: JSON.stringify(
       {
         message: 'Go Serverless v1.0! Your function executed successfully!',
         input: event,
       },
       null,
-      2
+      2,
     ),
   };
 
