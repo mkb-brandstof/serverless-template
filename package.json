@@ -11,7 +11,12 @@
     "type": "git",
     "url": "git+https://github.com/mkb-brandstof/serverless-template.git"
   },
-  "keywords": [ "serverless", "template", "aws", "nodejs" ],
+  "keywords": [
+    "serverless",
+    "template",
+    "aws",
+    "nodejs"
+  ],
   "author": "MKB Brandstof <devops@mkb-brandstof.nl>",
   "license": "MIT",
   "bugs": {
@@ -20,11 +25,21 @@
   "homepage": "https://github.com/mkb-brandstof/serverless-template#readme",
   "devDependencies": {
     "eslint": "^7.12.1",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.5.1",
     "serverless": "^2.4.0",
     "serverless-copy-webpack-plugin": "^1.0.0",
     "serverless-iam-roles-per-function": "^2.0.2",
     "serverless-webpack": "^5.3.5",
     "webpack": "^5.3.2",
     "webpack-node-externals": "^2.5.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix"
   }
 }
