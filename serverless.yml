@@ -6,7 +6,6 @@ provider:
   name: aws
   runtime: nodejs12.x
   region: ${opt:region, 'eu-west-1'}
-  stage: ${opt:stage, 'dev'}
 
   logRetentionInDays: ${self:custom.settings.logging.retention}
 
@@ -17,7 +16,7 @@ provider:
     ENVIRONMENT: ${opt:environment}
     LOG_LEVEL: ${self:custom.settings.logging.level}
     SSM_PARAM_PATH: /${self:service}/
-    STAGE: ${self:provider.stage}
+    STAGE: ${self:custom.stage}
 
 # you can add statements that apply to all Lambda functions here to the Lambda function's IAM Role here
 # permissions for individual functions should be added to the iamRoleStatements property on the function itself
@@ -49,7 +48,8 @@ plugins:
 #    - exclude-me-dir/**
 
 custom:
-  settings: ${file(settings/${self:provider.stage}.yml)}
+  stage: ${opt:stage, self:provider.stage}
+  settings: ${file(settings/${self:custom.stage}.yml)}
   webpack:
     includeModules: true
 
