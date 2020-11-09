@@ -13,6 +13,7 @@ provider:
     name: serverless-deployments.${opt:environment}.mkb-brandstof.nl
 
   environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
     ENVIRONMENT: ${opt:environment}
     LOG_LEVEL: ${self:custom.settings.logging.level}
     SSM_PARAM_PATH: /${self:service}/
