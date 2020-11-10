@@ -39,14 +39,9 @@ plugins:
   - serverless-webpack
 
 
-# you can add packaging information here
-#package:
-#  include:
-#    - include-me.js
-#    - include-me-dir/**
-#  exclude:
-#    - exclude-me.js
-#    - exclude-me-dir/**
+package:
+  individually: true
+
 
 custom:
   stage: ${opt:stage, self:provider.stage}
