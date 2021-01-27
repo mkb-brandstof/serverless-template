@@ -18,6 +18,13 @@ provider:
     LOG_LEVEL: ${self:custom.settings.logging.level}
     SSM_PARAM_PATH: /${self:service}/
     STAGE: ${self:custom.stage}
+    SERVICE: ${self:service}
+
+  tags:
+    Service: ${self:service}
+    Environment: ${opt:environment}
+    Stage: ${self:custom.stage}
+
 
 # you can add statements that apply to all Lambda functions here to the Lambda function's IAM Role here
 # permissions for individual functions should be added to the iamRoleStatements property on the function itself
@@ -45,6 +52,7 @@ package:
 
 custom:
   stage: ${opt:stage, self:provider.stage}
+  region: ${self:provider.region}
   settings: ${file(settings/${self:custom.stage}.yml)}
   webpack:
     includeModules: true
