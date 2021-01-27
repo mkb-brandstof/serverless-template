@@ -6,10 +6,14 @@ module.exports = {
     ecmaVersion: 10,
   },
   'env': {
+    jest: true,
     es2017: true,
     node: true,
   },
   'extends': 'eslint:recommended',
+  'ignorePatterns': [
+    'jest.config.js',
+  ],
   'rules': {
     /* possible errors */
     'no-console': 2,
@@ -130,7 +134,7 @@ module.exports = {
     'unicode-bom': 2,
 
     /* es6 */
-    'arrow-body-style': [2, 'as-needed'],
+    'arrow-body-style': [1, 'as-needed'],
     'arrow-parens': [2, 'as-needed'],
     'arrow-spacing': 2,
     'no-confusing-arrow': [2, { allowParens: true }],
@@ -154,9 +158,12 @@ module.exports = {
   },
   'overrides': [
     {
-      files: ['scripts/**/*.js'],
+      files: ['scripts/**/*.js', 'tests/**/*.js'],
       rules: {
-        'no-console': 'warn',
+        'camelcase': 1,
+        'max-lines-per-function': 0,
+        'no-console': 1,
+        'max-nested-callbacks': 0,
       },
     },
   ],
